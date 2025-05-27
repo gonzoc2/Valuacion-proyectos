@@ -97,7 +97,7 @@ if not st.session_state["logged_in"]:
 else:
     # URLs de fuentes de datos
     comparables = 'https://docs.google.com/spreadsheets/d/13eS6lIAxijfkss69OuPHezPxHuOdQUJF50duelc0jZ4/export?format=xlsx'
-    banace_esgari = 'https://docs.google.com/spreadsheets/d/15Fvpu7Ryhhrc_aH1UPa_uqR3Gw74r9huRN_WybPWkEk/export?format=xlsx'
+    banace_esgari = st.secrets["balance"]["banace_esgari"]
 
     # Funciones
     @st.cache_data
