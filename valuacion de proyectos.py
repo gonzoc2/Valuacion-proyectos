@@ -84,7 +84,6 @@ if not st.session_state["logged_in"]:
             else:
                 st.error("Usuario o contraseña incorrectos")
 else:
-    
     # Sidebar
     with st.sidebar:
         selected = option_menu(
@@ -101,7 +100,7 @@ else:
         st.session_state["username"] = ""
         st.rerun()
         
-    if st.sidebar.button("🔄 Limpiar caché y recargar"):
+    if st.sidebar.button("🔄 Recargar datos del mercado"):
         st.cache_data.clear()  # Borra caché de funciones con @st.cache_data
         st.cache_resource.clear()  # Borra caché de funciones con @st.cache_resource
         st.rerun()
