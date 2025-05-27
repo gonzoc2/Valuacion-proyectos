@@ -571,20 +571,6 @@ else:
                 st.markdown("---")
                 st.header("📊 Análisis Financiero del Proyecto")
 
-                st.subheader("📈 Flujos del Proyecto")
-                fig_flujo = px.line(df_flujos, x="Mes", y=["Flujo Neto", "Flujo Descontado"],
-                                    labels={"value": "Monto ($)", "Mes": "Mes"}, markers=True,
-                                    title="Flujo Neto vs Flujo Descontado")
-                fig_flujo.update_layout(template="plotly_white", legend_title_text='Tipo de Flujo')
-                st.plotly_chart(fig_flujo, use_container_width=True)
-
-                fig_capital = px.area(df_flujos, x="Mes", y="Capital de Trabajo",
-                                    labels={"Capital de Trabajo": "Capital Acumulado ($)", "Mes": "Mes"},
-                                    title="Requerimiento de Capital Adicional (Capital de Trabajo)")
-                fig_capital.update_layout(template="plotly_white")
-                st.plotly_chart(fig_capital, use_container_width=True)
-
-                st.markdown("---")
                 st.subheader("📄 Tabla de Flujos")
                 column_order = [
                     "Mes",
@@ -625,6 +611,24 @@ else:
 
                 tir = npf.irr(flujos_totales)
                 tir_anual = tir * 12
+
+                
+                st.markdown("---")
+                st.subheader("📈 Flujos del Proyecto")
+                fig_flujo = px.line(df_flujos, x="Mes", y=["Flujo Neto", "Flujo Descontado"],
+                                    labels={"value": "Monto ($)", "Mes": "Mes"}, markers=True,
+                                    title="Flujo Neto vs Flujo Descontado")
+                fig_flujo.update_layout(template="plotly_white", legend_title_text='Tipo de Flujo')
+                st.plotly_chart(fig_flujo, use_container_width=True)
+
+                fig_capital = px.area(df_flujos, x="Mes", y="Capital de Trabajo",
+                                    labels={"Capital de Trabajo": "Capital Acumulado ($)", "Mes": "Mes"},
+                                    title="Requerimiento de Capital Adicional (Capital de Trabajo)")
+                fig_capital.update_layout(template="plotly_white")
+                st.plotly_chart(fig_capital, use_container_width=True)
+
+                
+               
                 st.markdown("---")
                 col1, col2, col3 = st.columns(3)
                 col1.metric(label="📌 Valor Presente Neto (NPV)", value=f"${npv:,.2f}")
