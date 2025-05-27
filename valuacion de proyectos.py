@@ -99,6 +99,10 @@ else:
             menu_icon="cast",
             default_index=0
         )
+    if st.sidebar.button("🔄 Limpiar caché y recargar"):
+        st.cache_data.clear()  # Borra caché de funciones con @st.cache_data
+        st.cache_resource.clear()  # Borra caché de funciones con @st.cache_resource
+        st.rerun()
     # URLs de fuentes de datos
     comparables = 'https://docs.google.com/spreadsheets/d/13eS6lIAxijfkss69OuPHezPxHuOdQUJF50duelc0jZ4/export?format=xlsx'
     banace_esgari = st.secrets["balance"]["banace_esgari"]
