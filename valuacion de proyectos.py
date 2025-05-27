@@ -84,6 +84,12 @@ if not st.session_state["logged_in"]:
             else:
                 st.error("Usuario o contraseña incorrectos")
 else:
+    st.sidebar.success(f"Sesión activa como: {st.session_state['username']}")
+    
+    if st.sidebar.button("Cerrar sesión"):
+        st.session_state["logged_in"] = False
+        st.session_state["username"] = ""
+        st.rerun()
     # Sidebar
     with st.sidebar:
         selected = option_menu(
