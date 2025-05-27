@@ -49,16 +49,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Sidebar
-with st.sidebar:
-    selected = option_menu(
-        "Menú Principal", 
-        ["Inicio", "Análisis", "Configuración", 'WACC Esgari', 'BALANCE'],
-        icons=["house", "bar-chart", "gear", "cash", "file-earmark-text"],
-        menu_icon="cast",
-        default_index=0
-    )
-
 # Inicializar claves en session_state
 def init_session_state():
     defaults = {
@@ -94,6 +84,15 @@ if not st.session_state["logged_in"]:
             else:
                 st.error("Usuario o contraseña incorrectos")
 else:
+    # Sidebar
+    with st.sidebar:
+        selected = option_menu(
+            "Menú Principal", 
+            ["Inicio", "Análisis", "Configuración", 'WACC Esgari', 'BALANCE'],
+            icons=["house", "bar-chart", "gear", "cash", "file-earmark-text"],
+            menu_icon="cast",
+            default_index=0
+        )
     # URLs de fuentes de datos
     comparables = 'https://docs.google.com/spreadsheets/d/13eS6lIAxijfkss69OuPHezPxHuOdQUJF50duelc0jZ4/export?format=xlsx'
     banace_esgari = st.secrets["balance"]["banace_esgari"]
