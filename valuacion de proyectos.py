@@ -176,10 +176,22 @@ else:
     @st.cache_data
     def erp():
         url = "https://pages.stern.nyu.edu/~adamodar/pc/datasets/ctryprem.xlsx"
-        df = pd.read_excel(url, sheet_name="ERPs by country", skiprows=5)
-        df.columns = df.iloc[0]
-        df = df[1:].iloc[:, :7]
-        return df[df['Country'] == 'Mexico']['Total Equity Risk Premium'].values[0]
+    
+        df = pd.read_excel(
+            url,
+            sheet_name="ERPs by country",
+            skiprows=6,        # clave
+            header=0           # clave
+        )
+    
+        # limpia nombres de columnas
+        df.columns = df.columns.str.strip()
+    
+        return df.loc[
+            df["Country"] == "Mexico",
+            "Total Equity Risk Premium"
+        ].iloc[0]
+
 
     @st.cache_data
     def cargar_datos_hoja(url, nombre_hoja=None):
@@ -1110,3 +1122,4 @@ else:
                 height=450
             )
             st.plotly_chart(fig, use_container_width=True)
+
