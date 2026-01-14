@@ -180,17 +180,16 @@ else:
         df = pd.read_excel(
             url,
             sheet_name="ERPs by country",
-            skiprows=6,        # clave
-            header=0           # clave
+            skiprows=7
         )
     
-        # limpia nombres de columnas
-        df.columns = df.columns.str.strip()
+        df.columns = df.columns.astype(str).str.strip()
     
-        return df.loc[
-            df["Country"] == "Mexico",
-            "Total Equity Risk Premium"
-        ].iloc[0]
+        # toma la PRIMERA columna que contenga ese texto
+        erp_col = [c for c in df.columns if "Total Equity Risk Premium" in c][0]
+    
+        return df.loc[df["Country"] == "Mexico", erp_col].iloc[0]
+    
 
 
     @st.cache_data
@@ -1122,4 +1121,5 @@ else:
                 height=450
             )
             st.plotly_chart(fig, use_container_width=True)
+
 
